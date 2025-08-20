@@ -350,6 +350,8 @@ export class ToolManager {
       let args: Record<string, unknown> | null = null
       try {
         args = JSON.parse(argsString)
+        console.log("return json string : ");
+        console.log(argsString);
       } catch (error: unknown) {
         console.warn(
           'Error parsing tool call arguments with JSON.parse, trying jsonrepair:',
@@ -435,7 +437,7 @@ export class ToolManager {
         content: formattedContent,
         isError: result.isError
       }
-
+      console.log(response)
       // Trigger event
       eventBus.send(MCP_EVENTS.TOOL_CALL_RESULT, SendTarget.ALL_WINDOWS, response)
 

@@ -62,13 +62,20 @@ const handleFileUpload = () => {
 
 // 监听流式响应
 onMounted(async () => {
+    window.electron.ipcRenderer.on(
+      'mcp:tool-call-result',
+      (_event, result: MCPToolCallResult) => {
+          chatStore.handleMcpToolResult(_event,result)
+      }
+    )
   window.electron.ipcRenderer.on(STREAM_EVENTS.RESPONSE, (_, msg) => {
     // console.log('stream-response', msg)
     chatStore.handleStreamResponse(msg)
+    console.log('stream-response', msg)
   })
-
   window.electron.ipcRenderer.on(STREAM_EVENTS.END, (_, msg) => {
     chatStore.handleStreamEnd(msg)
+    console.log('STREAM_EVENTS.END', msg)
     setTimeout(() => {
       chatInput.value?.restoreFocus()
     }, 200)

@@ -497,7 +497,8 @@ export const useMcpStore = defineStore('mcp', () => {
     window.electron.ipcRenderer.on(
       MCP_EVENTS.TOOL_CALL_RESULT,
       (_event, result: MCPToolCallResult) => {
-        console.log(`MCP tool call result:`, result.function_name)
+        console.log(`MCP tool call result:`, result.content)
+        console.log(`MCP tool call result:`, _event)
         if (result && result.function_name) {
           toolResults.value[result.function_name] = result.content
         }

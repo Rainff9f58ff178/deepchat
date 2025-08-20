@@ -304,6 +304,11 @@ export const useChatStore = defineStore('chat', () => {
     }
   }
 
+  const handleMcpToolResult = (event,msg)=>{
+    console.log(msg)
+    console.log(event)
+  }
+
   const handleStreamResponse = (msg: {
     eventId: string
     content?: string
@@ -1195,6 +1200,7 @@ export const useChatStore = defineStore('chat', () => {
     setActiveThread,
     loadMessages,
     sendMessage,
+    handleMcpToolResult,
     handleStreamResponse,
     handleStreamEnd,
     handleStreamError,
